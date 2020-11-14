@@ -1,0 +1,59 @@
+{
+  "extends": ["prettier", "prettier/react", "plugin:react/recommended"],
+  "plugins": ["prettier"],
+  "rules": {
+    "react/prop-types": 0,
+    "no-underscore-dangle": 0,
+    "semi": 2,
+    "comma-dangle": [2, "always-multiline"],
+    "no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "ignoreRestSiblings": false
+      }
+    ],
+    "no-duplicate-case": "error",
+    "no-useless-constructor": "warn",
+    "react/display-name": 0,
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "quotes": ["error", "single"],
+    "object-curly-spacing": ["error", "always"],
+    "comma-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 90,
+        "ignoreComments": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreUrls": true
+      }
+    ],
+    "react/no-array-index-key": [0]
+  },
+  "globals": {
+    "window": true,
+    "document": true,
+    "localStorage": true,
+    "FormData": true,
+    "FileReader": true,
+    "Blob": true,
+    "navigator": true,
+    "fetch": false
+  },
+  "parser": "babel-eslint"
+}
