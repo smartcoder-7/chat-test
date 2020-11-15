@@ -55,16 +55,15 @@ const UserArea = () => {
   };
 
   const handleFilterChange = (value) => {
-    console.log('filter value', value);
     setFilter(value);
   };
 
   const handleClickAdd = () => {
-    console.log('I am adding somehow!');
+    //noop
   };
 
   const handleFollow = () => {
-    console.log('I am adding somehow!');
+    //noop
   };
 
   const handleClickUser = (user) => {
@@ -111,7 +110,7 @@ const UserArea = () => {
               isSelected={selectedUser && user.id === selectedUser.id}
             />),
         )}
-        <div ref={scrollRef} style={{ border: '1px solid red' }}></div>
+        <div ref={scrollRef} style={{ border: '1px solid gray' }}></div>
         {isLoading && <div>Loading...</div>}
       </div>
     </div>

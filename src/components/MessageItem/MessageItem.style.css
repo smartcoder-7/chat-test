@@ -1,0 +1,29 @@
+.message-item {
+  display: flex;
+  margin-bottom: calc(10 * var(--spacing-unit));
+}
+
+.message-item .content {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--border-radius);
+  padding: calc(3 * var(--spacing-unit));
+  text-align: left;
+}
+
+.message-item.right {
+  flex-direction: row-reverse;
+}
+
+.message-item.right .content {
+  margin-right: calc(3 * var(--spacing-unit));
+}
+
+.message-item.left .content {
+  margin-left: calc(3 * var(--spacing-unit));
+}
+
+.message-item img {
+  border-radius: 50%;
+}

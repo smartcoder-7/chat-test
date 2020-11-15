@@ -4,7 +4,7 @@
   background-color: #ecf1fa;
 }
 
-.main-chat .left {
+.main-chat > .left {
   width: 350px;
   height: 100%;
   background: white;
@@ -13,7 +13,7 @@
   filter: drop-shadow(0px 3px 8px rbga(0,0,0,0.07));
 }
 
-.main-chat .right {
+.main-chat > .right {
   display: flex;
   flex: 1;
 }

@@ -7,21 +7,30 @@ const ChatContext = createContext();
 export const useContextSetup = (userId) => {
   const [messages, setMessages] = useState([]);
   const fetch = async ({ method = 'GET', endpoint, query }) => {
-    const messages = await mockFetch({ method, endpoint, query });
-    setMessages(messages);
+    if (method === 'GET') {
+      const messages = await mockFetch({ method, endpoint, query });
+      setMessages(messages);
+    } else {
+      const message = await mockFetch({ method, endpoint, query });
+      setMessages((old) => [...old, message]);
+    }
   };
 
   useEffect(() => {
-    console.log('this is calling', userId);
     if (!userId) {
       return;
     }
-    fetch({ endpoint: '/api/messages', query: { userId, currentUserId: 1001 } });
+    fetch({ 
+      method: 'GET', 
+      endpoint: '/api/messages', 
+      query: { userId, currentUserId: 1001 }, 
+    });
   }, [userId]);
 
   return {
     messages,
     setMessages,
+    fetch,
   };
 };
 
