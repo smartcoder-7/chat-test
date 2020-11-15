@@ -1,6 +1,7 @@
 .btn {
-  width: 40px;
+  width: fit-content;
   height: 40px;
   border: solid 3px var(--gray-dark);
   border-radius: var(--border-radius);
+  white-space: nowrap;
 }

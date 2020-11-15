@@ -1,0 +1,26 @@
+.user-area {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-area .user-area__header {
+  height: 110px;
+  border-bottom: solid 1px #ededed;
+  padding: 15px 30px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.user-area__header .header__filter {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-area__header .header__dropdown {
+  display: flex;
+}
+
+.btn.btn-follow, .btn.btn-filter {
+  margin-left: 20px;
+}

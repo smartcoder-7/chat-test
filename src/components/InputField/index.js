@@ -1,1 +1,4 @@
-export { default } from './InputField';
+import InputField from './InputField';
+import './InputField.style.css';
+
+export default InputField;
