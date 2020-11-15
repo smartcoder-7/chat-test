@@ -14,9 +14,9 @@ import useDebounce from 'hooks/useDebounce';
 const DELAY_MS = 500;
 
 const UserArea = () => {
-  const [select, setSelect] = useState(null);
-  const [filter, setFilter] = useState('');
-  const debouncedSearchTerm = useDebounce(filter, DELAY_MS);
+  const [filter, setFilter] = useState('all');
+  const [search, setSearch] = useState('');
+  const debouncedSearchTerm = useDebounce(search, DELAY_MS);
   const { 
     users, 
     setIsLoading, 
@@ -34,27 +34,29 @@ const UserArea = () => {
   useEffect(() => {
     setIsLoading(true);
     fetch({ 
-      endpoint: '/api/users', 
+      endpoint: '/api/users',
       query: { 
-        limit: PAGINATION.limit, 
-        offset: pager.offset, 
-        searchTerm: debouncedSearchTerm, 
-      }, 
+        limit: PAGINATION.limit,
+        offset: pager.offset,
+        searchTerm: debouncedSearchTerm,
+        filter: filter,
+      },
     });
     setIsLoading(false);
-  }, [pager.offset, debouncedSearchTerm]);
+  }, [pager.offset, debouncedSearchTerm, filter]);
 
   useEffect(() => {
     pagerDispatch({ type: 'RESET_PAGE' });
     setUsers([]);
-  }, [debouncedSearchTerm]);
+  }, [debouncedSearchTerm, filter]);
 
-  const handleFilterChange = (value) => {
-    setFilter(value);
+  const handleSearchChange = (value) => {
+    setSearch(value);
   };
 
-  const handleSelectChange = (value) => {
-    setSelect(value);
+  const handleFilterChange = (value) => {
+    console.log('filter value', value);
+    setFilter(value);
   };
 
   const handleClickAdd = () => {
@@ -78,8 +80,8 @@ const UserArea = () => {
       <div className="user-area__header">
         <div className="header__filter">
           <InputField 
-            onChange={handleFilterChange} 
-            value={filter} 
+            onChange={handleSearchChange} 
+            value={search} 
             name="filter" 
             placeholder="Search or a new chat"
           />
@@ -90,8 +92,8 @@ const UserArea = () => {
         <div className="header__dropdown">
           <Dropdown 
             options={FILTER_OPTIONS} 
-            onChange={handleSelectChange} 
-            value={select} 
+            onChange={handleFilterChange} 
+            value={filter} 
             name="dropdown"
           />
           <Button onClick={handleFollow} className="btn-follow">Follow up</Button>

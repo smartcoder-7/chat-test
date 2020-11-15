@@ -1,11 +1,15 @@
 import React from 'react';
 
 const Dropdown = ({ options, onChange, value, name, ...props }) => {
+  const handleChange = (event) => {
+    onChange(event.target.value);
+  };
+
   return (
     <select 
       className="dropdown" 
       value={value} 
-      onChange={onChange}
+      onChange={handleChange}
       name={name}
       {...props}
     >

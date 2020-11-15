@@ -21,9 +21,21 @@ class Database {
 
   read = ({ query }) => {
     this.syncWithLocalStorage();
-    const { limit, offset, searchTerm = '' } = query;
+    const { limit, offset, searchTerm = '', filter = null } = query;
+    const predicator1 = (user) => user.isFavorite === true;
+    const predicator2 = (user) => user.isFavorite === false;
+    const noop = () => { return true; };
+    let finalPredicator = noop;
+    
+    if (filter === 'favorite' ) {
+      finalPredicator = predicator1;
+    } else if (filter === 'unfavorite') {
+      finalPredicator = predicator2;
+    } 
+
     return this.users
       .filter((user) => (user.firstName + ' ' + user.lastName).includes(searchTerm))
+      .filter(finalPredicator)
       .slice(offset, offset + limit);
   }
 

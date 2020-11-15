@@ -12,7 +12,7 @@ export const FILTER_OPTIONS = [
     label: 'Favorites',
   },
   {
-    value: 'favorite',
+    value: 'unfavorite',
     label: 'Not Favorites',
   },
 ];
