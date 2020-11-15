@@ -1,6 +1,8 @@
 import React from 'react';
 import cn from 'classnames';
 
+import { maxChars } from 'utils/helpers';
+
 const User = ({ user, selected, onClickStar, onClickUser }) => {
   return (
     <div className={cn('user', { 'selected': selected })} onClick={onClickUser}>
@@ -17,7 +19,7 @@ const User = ({ user, selected, onClickStar, onClickUser }) => {
           <span className='row__time'>1h</span>
         </div>
         <div className='info__row'>
-          <span className='row__email'>{user.email}</span>
+          <span className='row__email'>{maxChars(user.email, 25)}</span>
           <span role="button" onClick={onClickStar}>
             <i className={cn('fas fa-star', { 'active': user.isFavorite })} onClick={onClickStar} />
           </span>

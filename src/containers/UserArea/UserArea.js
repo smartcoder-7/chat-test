@@ -1,36 +1,51 @@
 import React, { useState, useRef, useReducer, useEffect } from 'react';
 
 import { useUserContext } from 'context/User.context';
-import InputField from 'components/InputField';
 import Dropdown from 'components/Dropdown';
 import User from 'components/User';
 import Button from 'components/Button';
 import { FILTER_OPTIONS } from 'utils/constants';
 import useInfiniteScroll from 'hooks/useInfiniteScroll';
+import pageReducer from './reducer';
+import { PAGINATION } from 'utils/constants';
+import InputField from 'components/InputField';
+import useDebounce from 'hooks/useDebounce';
+// import usePrevious from 'hooks/usePrevious';
 
-const LIMIT = 20;
-const pageReducer = (state, action) => {
-  switch (action.type) {
-    case 'ADVANCED_PAGE':
-      return { ...state, offset: state.offset +  LIMIT };
-    default:
-      return false;
-  }
-};
+const DELAY_MS = 500;
 
 const UserArea = () => {
   const [select, setSelect] = useState(null);
   const [filter, setFilter] = useState('');
-  const { users, setIsLoading, fetch, isLoading } = useUserContext();
+  const debouncedSearchTerm = useDebounce(filter, DELAY_MS);
+  // const prevSearchTerm = usePrevious(debouncedSearchTerm);
+  const { users, setIsLoading, fetch, isLoading, setUsers } = useUserContext();
   const scrollRef = useRef(null);
   const [pager, pagerDispatch] = useReducer(pageReducer, { offset: 0 });
   useInfiniteScroll(scrollRef, pagerDispatch);
 
   useEffect(() => {
     setIsLoading(true);
-    fetch({ endpoint: '/api/users', query: { limit: LIMIT, offset: pager.offset } });
+    console.log('calling api');
+    fetch({ 
+      endpoint: '/api/users', 
+      query: { 
+        limit: PAGINATION.limit, 
+        offset: pager.offset, 
+        searchTerm: debouncedSearchTerm, 
+      }, 
+    });
     setIsLoading(false);
-  }, [pager.offset]);
+  }, [pager.offset, debouncedSearchTerm]);
+
+  useEffect(() => {
+    pagerDispatch({ type: 'RESET_PAGE' });
+    setUsers([]);
+  }, [debouncedSearchTerm]);
+
+  const handleFilterChange = (value) => {
+    setFilter(value);
+  };
 
   const handleSelectChange = (value) => {
     setSelect(value);
@@ -40,22 +55,18 @@ const UserArea = () => {
     console.log('I am adding somehow!');
   };
 
-  const handleChangeFilter = (value) => {
-    setFilter(value);
-    console.log('I am chaning a filter', value);
-  };
-
   const handleFollow = () => {
     console.log('I am adding somehow!');
   };
 
   console.log('users', users);
+
   return (
     <div className="user-area">
       <div className="user-area__header">
         <div className="header__filter">
           <InputField 
-            onChange={handleChangeFilter} 
+            onChange={handleFilterChange} 
             value={filter} 
             name="filter" 
             placeholder="Search or a new chat"
@@ -69,6 +80,7 @@ const UserArea = () => {
             options={FILTER_OPTIONS} 
             onChange={handleSelectChange} 
             value={select} 
+            name="dropdown"
           />
           <Button onClick={handleFollow} className="btn-follow">Follow up</Button>
         </div>

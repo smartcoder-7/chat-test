@@ -1,1 +1,4 @@
-export { default } from './Dropdown';
+import Dropdown from './Dropdown';
+import './Dropdown.style.css';
+
+export default Dropdown;

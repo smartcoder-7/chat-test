@@ -1,9 +1,14 @@
 import React from 'react';
-import './Dropdown.style.css';
 
-const Dropdown = ({ options, onChange, value }) => {
+const Dropdown = ({ options, onChange, value, name, ...props }) => {
   return (
-    <select className="dropdown" value={value} onChange={onChange}>
+    <select 
+      className="dropdown" 
+      value={value} 
+      onChange={onChange}
+      name={name}
+      {...props}
+    >
       {options.map((option, index) => 
         <option key={index} value={option.value}>{option.label}</option>,
       )}
