@@ -23,6 +23,16 @@ export const useContextSetup = () => {
     }
   };
 
+  const toggleStar = (user) => {
+    setUsers((users) => users.map(entity => {
+      if (entity.id === user.id) {
+        return { ...entity, isFavorite: user.isFavorite ? false : true };
+      }
+
+      return entity;
+    }));
+  };
+
   return {
     users,
     setUsers,
@@ -31,6 +41,7 @@ export const useContextSetup = () => {
     fetch,
     selectedUser,
     toggleSelectUser,
+    toggleStar,
   };
 };
 

@@ -25,6 +25,7 @@ const UserArea = () => {
     setUsers,
     toggleSelectUser,
     selectedUser,
+    toggleStar,
   } = useUserContext();
   const scrollRef = useRef(null);
   const [pager, pagerDispatch] = useReducer(pageReducer, { offset: 0 });
@@ -32,7 +33,6 @@ const UserArea = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    console.log('calling api');
     fetch({ 
       endpoint: '/api/users', 
       query: { 
@@ -69,11 +69,9 @@ const UserArea = () => {
     toggleSelectUser(user);
   };
 
-  const handleClickStar = () => {
-    
+  const handleClickStar = (user) => {
+    toggleStar(user);
   };
-
-  console.log('users', users);
 
   return (
     <div className="user-area">

@@ -13,7 +13,8 @@ const User = ({
     onClickUser(user);
   };
 
-  const handleClickStar = (user) => () => {
+  const handleClickStar = (user) => (event) => {
+    event.stopPropagation();
     onClickStar(user);
   };
 
