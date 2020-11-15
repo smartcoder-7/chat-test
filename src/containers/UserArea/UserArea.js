@@ -84,6 +84,7 @@ const UserArea = () => {
             value={search} 
             name="filter" 
             placeholder="Search or a new chat"
+            icon="fa-search"
           />
           <Button onClick={handleClickAdd} className="btn-filter">
             <i className="fal fa-comment-medical" />
