@@ -1,0 +1,47 @@
+.user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  border-bottom: solid 1px #ededed;
+  cursor: pointer;
+}
+.user.selected {
+  background: #eff4ff;
+  border-left: 5px solid gray;
+}
+.user:hover {
+  background: #eff4ff;
+}
+
+.user .user__logo {
+  border-radius: 50%;
+}
+.user .user__info {
+  margin-right: auto;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+}
+.info__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.row__username {
+  font-weight: bold;
+  color: var(--gray-dark);
+}
+.row__email {
+  font-weight: 400;
+  color: var(--gray-medium);
+  word-break: break-all;
+}
+.info__row i {
+  color: var(--gray-light);
+}
+.info__row i.active {
+  color: var(--gray-dark)
+}

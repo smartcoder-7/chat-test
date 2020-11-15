@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { useUserContext } from 'context/User.context';
 import InputField from 'components/InputField';
 import Dropdown from 'components/Dropdown';
 import User from 'components/User';
@@ -10,7 +11,9 @@ import { FILTER_OPTIONS } from 'utils/constants';
 const UserArea = () => {
   const [select, setSelect] = useState(null);
   const [filter, setFilter] = useState('');
+  const { users } = useUserContext();
 
+  console.log('users', users);
   const handleSelectChange = (value) => {
     setSelect(value);
   };
@@ -52,7 +55,7 @@ const UserArea = () => {
         </div>
       </div>
       <div className="user-area__user-list">
-        {Array(20).fill(0).map((user, index) => <User key={index} />)}
+        {!!users.length && users.map((user, index) => <User key={index} user={user} />)}
       </div>
     </div>
   );

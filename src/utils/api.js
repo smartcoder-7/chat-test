@@ -3,7 +3,7 @@ import { mockUsers } from 'services/mockData';
 function mockFetch({ endpoint = '', query = {} }) {
   return new Promise((resolve, reject) => {
     const { limit, offset } = query;
-    if (!endpoint || endpoint === '/api/users' ) {
+    if (!endpoint || endpoint !== '/api/users' ) {
       return reject({ error: 'API endpoint does exits' });
     }
 
