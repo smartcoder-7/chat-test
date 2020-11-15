@@ -23,14 +23,28 @@ export const useContextSetup = () => {
     }
   };
 
-  const toggleStar = (user) => {
-    setUsers((users) => users.map(entity => {
-      if (entity.id === user.id) {
-        return { ...entity, isFavorite: user.isFavorite ? false : true };
-      }
+  const toggleStar = async (user) => {
+    const response = await mockFetch({ 
+      method: 'POST', 
+      endpoint: '/api/users',
+      query: {
+        userId: user.id,
+      },
+      body: {
+        isFavorite: user.isFavorite ? false : true,
+      },
+    });
 
-      return entity;
-    }));
+    console.log('toggle star=====>', response);
+    if (response) {
+      setUsers((users) => users.map(entity => {
+        if (entity.id === user.id) {
+          return { ...entity, isFavorite: user.isFavorite ? false : true };
+        }
+  
+        return entity;
+      }));
+    }
   };
 
   return {

@@ -1,8 +1,25 @@
-import { mockUsers } from 'services/mockData';
+import mockDB from 'services/mockDatabase';
 
-function mockFetch({ endpoint = '', query = {} }) {
+function mockFetch({ method = 'GET', endpoint = '', query = {}, body = {} }) {
+  /** for mocking POST method */
+  if (method === 'POST') {
+    return new Promise((resolve, reject) => {
+      const { userId } = query;
+      try {
+        setTimeout(() => {
+          return resolve(
+            mockDB.update({ userId, body }),
+          );
+        }, Math.random() * 2);
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
+  /** for mocking GET method */
   return new Promise((resolve, reject) => {
-    const { limit, offset, searchTerm = '' } = query;
+    const { searchTerm = '' } = query;
     if (!endpoint || endpoint !== '/api/users' ) {
       return reject({ error: 'API endpoint does exits' });
     }
@@ -10,9 +27,7 @@ function mockFetch({ endpoint = '', query = {} }) {
     try {
       setTimeout(() => {
         return resolve(
-          mockUsers
-            .filter((user) => user.email.includes(searchTerm))
-            .slice(offset, offset + limit));
+          mockDB.read({ query, searchTerm }));
       }, Math.random() * 2);
     } catch (error) {
       return reject(error);
