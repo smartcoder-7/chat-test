@@ -6,11 +6,11 @@ function mockFetch({ endpoint = '', query = {} }) {
     if (!endpoint || endpoint !== '/api/users' ) {
       return reject({ error: 'API endpoint does exits' });
     }
-
+    
     try {
       setTimeout(() => {
-        return resolve(mockUsers.slice(offset, limit));
-      }, Math.random() * 1);
+        return resolve(mockUsers.slice(offset, offset + limit));
+      }, Math.random() * 2);
     } catch (error) {
       return reject(error);
     }

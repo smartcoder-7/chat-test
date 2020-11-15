@@ -1,6 +1,7 @@
 .user-area {
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 
 .user-area .user-area__header {
@@ -10,6 +11,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.user-area .user-area__user-list {
+  overflow-y: scroll;
 }
 
 .user-area__header .header__filter {
@@ -23,4 +28,8 @@
 
 .btn.btn-follow, .btn.btn-filter {
   margin-left: 20px;
+}
+
+.btn.btn-filter {
+  margin-bottom: calc(2 * var(--spacing-unit));
 }

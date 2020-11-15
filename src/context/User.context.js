@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { createContext } from 'utils/context';
 import mockFetch from 'utils/api';
 
@@ -11,20 +11,15 @@ export const useContextSetup = () => {
   
   const fetch = async ({ endpoint, query }) => {
     const users = await mockFetch({ endpoint, query });
-    setUsers(users);
+    setUsers((oldUsers) => [...oldUsers, ...users]);
   };
-
-  useEffect(() => {
-    setIsLoading(true);
-    fetch({ endpoint: '/api/users', query: { limit: 20, offset: 0 } });
-    setIsLoading(false);
-  }, []);
 
   return {
     users,
     setUsers,
     isLoading,
     setIsLoading,
+    fetch,
   };
 };
 
