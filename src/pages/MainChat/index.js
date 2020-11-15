@@ -1,1 +1,4 @@
-export { default } from './MainChat';
+import MainChat from  './MainChat';
+import './MainChat.style.css';
+
+export default MainChat;

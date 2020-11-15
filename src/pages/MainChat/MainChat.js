@@ -1,9 +1,16 @@
 import React from 'react';
+import ChatArea from 'containers/ChatArea';
+import UserArea from 'containers/UserArea';
 
 const MainChat = () => {
   return (
-    <div>
-      main chat
+    <div className="main-chat">
+      <div className="left">
+        <UserArea />
+      </div>
+      <div className="right">
+        <ChatArea />
+      </div>
     </div>
   );
 };
