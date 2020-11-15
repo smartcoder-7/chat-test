@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { useUserContext } from 'context/User.context';
+import { useChatContext } from 'context/Chat.context';
 
 const ChatArea = () => {
   const { selectedUser } = useUserContext();
-
-  console.log('selectedUser', selectedUser);
+  const { messages } = useChatContext();
+  console.log('messages', messages);
   const renderBlank = () => (
     <div className="chat-area-blank">
       <h1>Select a conversation</h1>
@@ -13,9 +14,13 @@ const ChatArea = () => {
     </div>
   );
 
+  const renderMessages = () => (
+    <div>render messages</div>
+  );
+
   return (
     <div className="chat-area">
-      {renderBlank()}
+      {!!selectedUser ? renderMessages() : renderBlank()}
     </div>
   );
 };

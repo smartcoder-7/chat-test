@@ -4,7 +4,6 @@ import mockFetch from 'utils/api';
 
 const UserContext = createContext();
 
-
 export const useContextSetup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState([]);
@@ -35,7 +34,6 @@ export const useContextSetup = () => {
       },
     });
 
-    console.log('toggle star=====>', response);
     if (response) {
       setUsers((users) => users.map(entity => {
         if (entity.id === user.id) {

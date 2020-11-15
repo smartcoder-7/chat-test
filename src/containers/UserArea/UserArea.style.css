@@ -31,5 +31,6 @@
 }
 
 .btn.btn-filter {
+  padding: 0 calc(2 * var(--spacing-unit));
   margin-bottom: calc(2 * var(--spacing-unit));
 }
