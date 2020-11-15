@@ -3,9 +3,22 @@ import cn from 'classnames';
 
 import { maxChars } from 'utils/helpers';
 
-const User = ({ user, selected, onClickStar, onClickUser }) => {
+const User = ({ 
+  user, 
+  isSelected, 
+  onClickStar, 
+  onClickUser, 
+}) => {
+  const handleClickUser = (user) => () => {
+    onClickUser(user);
+  };
+
+  const handleClickStar = (user) => () => {
+    onClickStar(user);
+  };
+
   return (
-    <div className={cn('user', { 'selected': selected })} onClick={onClickUser}>
+    <div className={cn('user', { 'selected': !!isSelected })} onClick={(handleClickUser(user))}>
       <img 
         className="user__logo"
         src={'https://freesvg.org/img/abstract-user-flat-4.png'}
@@ -20,8 +33,8 @@ const User = ({ user, selected, onClickStar, onClickUser }) => {
         </div>
         <div className='info__row'>
           <span className='row__email'>{maxChars(user.email, 25)}</span>
-          <span role="button" onClick={onClickStar}>
-            <i className={cn('fas fa-star', { 'active': user.isFavorite })} onClick={onClickStar} />
+          <span role="button" onClick={handleClickStar(user)}>
+            <i className={cn('fas fa-star', { 'active': user.isFavorite })} />
           </span>
         </div>
       </div>

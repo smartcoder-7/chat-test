@@ -1,0 +1,18 @@
+.chat-area {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.chat-area-blank {
+  width: 400px;
+  text-align: center;
+  margin: auto;
+  color: var(--gray-dark);
+}
+
+.chat-area-blank p {
+  font-size: 26px;
+}

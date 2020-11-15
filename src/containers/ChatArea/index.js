@@ -1,1 +1,4 @@
-export { default } from './ChatArea';
+import ChatArea from './ChatArea';
+import './ChatArea.style.css';
+
+export default ChatArea;

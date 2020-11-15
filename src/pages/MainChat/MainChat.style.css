@@ -14,5 +14,6 @@
 }
 
 .main-chat .right {
+  display: flex;
   flex: 1;
 }

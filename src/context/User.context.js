@@ -8,10 +8,19 @@ const UserContext = createContext();
 export const useContextSetup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
   
   const fetch = async ({ endpoint, query }) => {
     const users = await mockFetch({ endpoint, query });
     setUsers((oldUsers) => [...oldUsers, ...users]);
+  };
+
+  const toggleSelectUser = (user) => {
+    if (selectedUser && selectedUser.id === user.id) {
+      setSelectedUser(null);
+    } else {
+      setSelectedUser(user);
+    }
   };
 
   return {
@@ -20,6 +29,8 @@ export const useContextSetup = () => {
     isLoading,
     setIsLoading,
     fetch,
+    selectedUser,
+    toggleSelectUser,
   };
 };
 
